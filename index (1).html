@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Printmo Vendo Machine</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#fff;--ink:#0b1220;--muted:#4a5568;--blue:#0a6cf5;--soft:#eef5ff;--card:#f4f8ff;--line:#e3ecfa;--blob:#dcebff;--hb:rgba(255,255,255,.94);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--ink:#f1f5fb;--muted:#a9b6cc;--soft:#12233f;--card:#101c33;--line:#1c2d4b;--blob:#12294d;--hb:rgba(11,18,32,.94)}}
+:root[data-theme="dark"]{--bg:#0b1220;--ink:#f1f5fb;--muted:#a9b6cc;--soft:#12233f;--card:#101c33;--line:#1c2d4b;--blob:#12294d;--hb:rgba(11,18,32,.94)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hb);z-index:30}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hb);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:44px;height:44px}
+.logo b{display:block;font-size:29px;font-weight:800;letter-spacing:-1px;line-height:1}
+.logo b i{font-style:normal;color:var(--blue)}
+.logo small{display:block;font-size:9px;letter-spacing:.3em;color:var(--blue);font-weight:600;margin-top:3px}
+nav{display:flex;gap:30px;font-weight:500;font-size:15px}
+nav a{padding:8px 0;border-bottom:3px solid transparent}
+nav a.on{color:var(--blue);border-color:var(--blue)}
+.ibtn{background:none;border:0;color:var(--blue);cursor:pointer;padding:6px;border-radius:8px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:40px 0 30px}
+h1{font-size:clamp(44px,7vw,76px);line-height:1.02;font-weight:800;letter-spacing:-2.5px;margin:0 0 22px}
+h1 span{color:var(--blue);display:block}
+.hero p{font-size:18px;color:var(--muted);max-width:500px;margin:0 0 30px}
+.btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:17px;border:2px solid var(--blue);cursor:pointer;background:transparent;color:var(--blue)}
+.btn.p{background:var(--blue);color:#fff}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.art{position:relative;display:flex;justify-content:center}
+.blob{position:absolute;inset:6% 4% 6% 8%;background:var(--blob);border-radius:50% 45% 50% 50%}
+.blob2{position:absolute;right:-4%;bottom:10%;width:34%;height:34%;background:var(--blue);border-radius:100% 0 100% 40%;transform:rotate(-10deg)}
+.art svg{position:relative;width:min(100%,430px);height:auto;filter:drop-shadow(0 24px 24px rgba(10,40,100,.28))}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:18px 0}
+.fc{display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+.ic{flex:none;width:72px;height:72px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--blue)}
+.ic svg{width:34px;height:34px}
+.fc h3{margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-.5px}
+.fc p{margin:0;color:var(--muted);font-size:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 36px;margin:26px 0}
+.panel h2{margin:0;font-size:36px;font-weight:700;letter-spacing:-1px}
+.panel h2+i{display:block;width:44px;height:4px;background:var(--blue);border-radius:2px;margin:12px 0 14px}
+.sub{margin:0 0 22px;color:var(--muted)}
+.how{display:grid;grid-template-columns:.8fr 2.2fr;align-items:center;gap:20px}
+.steps{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.st{text-align:center;flex:1;position:relative}
+.st .ic{margin:0 auto 12px;width:80px;height:80px}
+.st .n{position:absolute;top:-10px;left:calc(50% - 56px);width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:19px;display:grid;place-items:center}
+.st h4{margin:0;font-size:20px;font-weight:600}
+.st p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.arr{color:var(--blue);padding-top:34px;flex:none}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pc{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px}
+.pc h3{margin:0 0 4px;font-size:20px}
+.pc .pr{font-size:30px;font-weight:800;color:var(--blue);letter-spacing:-1px}
+.pc .pr small{font-size:14px;font-weight:500;color:var(--muted)}
+.pc p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.note{font-size:13px;color:var(--muted);margin:14px 0 0}
+.demo{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
+.f{margin-bottom:16px}
+input[type=text],input[type=email],input[type=number],input[type=search],select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg)}
+input[type=file]{width:100%;padding:12px;border:2px dashed var(--blue);border-radius:12px;background:var(--bg)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-width:84px;padding:11px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-weight:600}
+.seg button[aria-pressed=true]{border-color:var(--blue);background:var(--blue);color:#fff}
+.sum{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.sum .row{display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.sum .tot{font-size:26px;font-weight:800;color:var(--blue);border-top:1px solid var(--line);padding-top:12px}
+.bar{height:12px;border-radius:99px;background:var(--soft);overflow:hidden;display:none}
+.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
+.msg{min-height:24px;font-weight:600;color:var(--blue)}
+.msg.err{color:#d93025}
+.loc{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.lc{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.lc h3{margin:0;font-size:18px}
+.lc p{margin:0;color:var(--muted);font-size:14px}
+.tag{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;background:#e2f7e8;color:#12703a}
+.tag.busy{background:#fff0d6;color:#8a5200}
+.lc a{color:var(--blue);font-weight:600;font-size:14px;margin-top:4px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.ci p{margin:0 0 12px;color:var(--muted)}
+.ci b{color:var(--ink)}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 0 40px}
+#so{position:fixed;inset:0;z-index:40;background:rgba(5,10,25,.55);display:none;align-items:flex-start;justify-content:center;padding:calc(90px + env(safe-area-inset-top,0px)) 16px 16px}
+#so.open{display:flex}
+.sbox{width:min(560px,100%);background:var(--bg);border-radius:18px;padding:18px;border:1px solid var(--line);max-height:80vh;overflow:auto}
+.sbox ul{list-style:none;margin:10px 0 0;padding:0}
+.sbox li a{display:block;padding:11px 12px;border-radius:10px}
+.sbox li a:hover,.sbox li a:focus{background:var(--soft)}
+.sbox li small{color:var(--muted);display:block}
+@media (max-width:960px){
+nav{order:3;width:100%;justify-content:space-between;gap:10px;overflow-x:auto}
+.hero,.demo,.contact,.how{grid-template-columns:1fr}
+.feat,.grid3{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+.steps{flex-direction:column;align-items:stretch;gap:26px}
+.arr{display:none}
+.st .n{left:calc(50% - 58px)}
+.panel{padding:26px 20px}
+.loc{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+  <a class="logo" href="#home" aria-label="Printmo Vendo Machine">
+    <svg viewBox="0 0 48 48" fill="none" stroke="#0b1220" stroke-width="2.6" stroke-linejoin="round"><rect x="9" y="6" width="26" height="32" rx="3" fill="#fff"/><rect x="14" y="11" width="14" height="12" rx="1.5"/><path d="M17 15h8M17 19h6"/><rect x="31" y="9" width="6" height="20" rx="2" fill="#0a6cf5"/><path d="M13 34l2 8h18l2-8z" fill="#fff"/></svg>
+    <span><b><i>p</i>rintmo</b><small>— VENDO MACHINE —</small></span>
+  </a>
+  <nav aria-label="Main">
+    <a href="#home" class="on">Home</a><a href="#how">How It Works</a><a href="#services">Services</a><a href="#locations">Locations</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="ibtn" id="sb" aria-label="Search the site"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+</div>
+</header>
+
+<div id="so" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="sbox">
+    <input type="search" id="sq" placeholder="Search services, locations, help…" aria-label="Search">
+    <ul id="sr"></ul>
+  </div>
+</div>
+
+<main class="wrap">
+<section class="hero" id="home">
+  <div>
+    <h1>Print Anytime, <span>Anywhere</span></h1>
+    <p>Need a document printed? Printmo Vendo Machine brings convenient, fast, and reliable self-service printing right to you — anytime, anywhere.</p>
+    <div class="btns">
+      <a class="btn p" href="#locations"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Find a Machine <span aria-hidden="true">→</span></a>
+      <a class="btn" href="#how"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3l15 9-15 9z"/></svg>How It Works</a>
+    </div>
+  </div>
+  <div class="art" aria-hidden="true">
+    <div class="blob"></div><div class="blob2"></div>
+    <svg viewBox="0 0 460 480">
+      <g stroke="#0a6cf5" stroke-width="16" stroke-linecap="round"><path d="M40 70l24 18"/><path d="M14 150l50 8"/><path d="M40 218l30-16"/></g>
+      <rect x="120" y="50" width="220" height="62" rx="6" fill="#0d1117"/>
+      <text x="170" y="88" font-family="Poppins,sans-serif" font-weight="800" font-size="26" fill="#fff">printmo</text>
+      <text x="196" y="104" font-family="Poppins,sans-serif" font-size="7" letter-spacing="2" fill="#4da3ff">VENDO MACHINE</text>
+      <rect x="110" y="108" width="240" height="340" rx="8" fill="#161b22"/>
+      <rect x="350" y="52" width="92" height="400" fill="#0a6cf5" transform="skewY(4) translate(0 -14)"/>
+      <rect x="132" y="130" width="168" height="125" rx="6" fill="#0d1117"/>
+      <rect x="140" y="138" width="152" height="108" rx="3" fill="#e8f3ff"/>
+      <text x="216" y="170" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="600" font-size="11" fill="#0b1220">Print Your</text>
+      <text x="216" y="184" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="600" font-size="11" fill="#0b1220">Documents Here</text>
+      <g fill="#fff" stroke="#0a6cf5" stroke-width="2"><circle cx="176" cy="216" r="15"/><circle cx="216" cy="216" r="15"/><circle cx="256" cy="216" r="15"/></g>
+      <g font-family="Poppins,sans-serif" font-size="6" font-weight="600" fill="#0b1220" text-anchor="middle"><text x="176" y="241">PDF</text><text x="216" y="241">DOC</text><text x="256" y="241">IMG</text></g>
+      <rect x="312" y="150" width="30" height="130" rx="6" fill="#0d1117" stroke="#2a3340"/>
+      <rect x="318" y="158" width="18" height="16" rx="2" fill="#0a6cf5"/><rect x="318" y="190" width="18" height="12" rx="2" fill="#2a3340"/><rect x="318" y="256" width="18" height="6" rx="2" fill="#0a6cf5"/>
+      <rect x="132" y="280" width="190" height="130" rx="6" fill="#0d1117" stroke="#2a3340"/>
+      <path d="M160 300l80-18 14 8-4 70-92 4z" fill="#fff" stroke="#cfd8e6"/>
+      <g stroke="#b6c3d6" stroke-width="2"><path d="M172 316h60M170 328h60M168 340h58M168 352h50"/></g>
+      <g fill="#fff" font-family="Poppins,sans-serif" font-weight="600"><text x="368" y="300" font-size="20" font-weight="800">printmo</text><text x="368" y="330" font-size="13">Fast.</text><text x="368" y="350" font-size="13">Easy.</text><text x="368" y="370" font-size="13">Affordable.</text></g>
+    </svg>
+  </div>
+</section>
+
+<section class="feat" aria-label="Benefits">
+  <div class="fc"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></div><div><h3>Fast Printing</h3><p>Get your documents printed in just a few minutes.</p></div></div>
+  <div class="fc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10l5 1a2 2 0 0 1 1.5 2.2L17.500 19a3 3 0 0 1-3 2.500H11a3 3 0 0 1-2.500-1.300L5 15a1.500 1.500 0 0 1 2.400-1.700L9 15"/></svg></div><div><h3>Easy to Use</h3><p>Simple steps, even for first-time users.</p></div></div>
+  <div class="fc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M8 21V4h6a4 4 0 0 1 0 8H8"/><path d="M4 8h13M4 12h13"/></svg></div><div><h3>Affordable Rates</h3><p>High-quality prints at budget-friendly prices.</p></div></div>
+</section>
+
+<section class="panel" id="how">
+  <div class="how">
+    <div><h2>How It Works</h2><i></i><p class="sub" style="margin:0">Print in 3 simple steps.</p></div>
+    <div class="steps">
+      <div class="st"><span class="n">1</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.500 1.500A3.800 3.800 0 0 1 17.500 18"/><path d="M12 21v-8M9 15.500l3-3 3 3"/></svg></div><h4>Upload File</h4><p>Select your document from your device.</p></div>
+      <div class="arr" aria-hidden="true"><svg width="38" height="22" viewBox="0 0 38 22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11h32M26 3l8 8-8 8"/></svg></div>
+      <div class="st"><span class="n">2</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h3"/></svg></div><h4>Pay</h4><p>Use cash, card, or e-wallet.</p></div>
+      <div class="arr" aria-hidden="true"><svg width="38" height="22" viewBox="0 0 38 22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11h32M26 3l8 8-8 8"/></svg></div>
+      <div class="st"><span class="n">3</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2"/><rect x="7" y="14" width="10" height="7" rx="1"/></svg></div><h4>Print</h4><p>Collect your document from the machine.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="services">
+  <h2>Services &amp; Rates</h2><i></i>
+  <p class="sub">Pick what you need, then try the price calculator below.</p>
+  <div class="grid3">
+    <div class="pc"><h3>Black &amp; White</h3><div class="pr">₱3 <small>/ page</small></div><p>Documents, reports, and school papers.</p></div>
+    <div class="pc"><h3>Full Color</h3><div class="pr">₱8 <small>/ page</small></div><p>Presentations, flyers, and certificates.</p></div>
+    <div class="pc"><h3>Photo Print</h3><div class="pr">₱15 <small>/ photo</small></div><p>Glossy images straight from your phone.</p></div>
+  </div>
+  <p class="note">Sample rates. Edit them in the code to match your real prices.</p>
+
+  <h3 style="margin:30px 0 14px;font-size:22px">Try the machine</h3>
+  <div class="demo">
+    <div>
+      <div class="f"><label for="file">1. Upload file (PDF, DOC, image)</label><input type="file" id="file" accept=".pdf,.doc,.docx,image/*"></div>
+      <div class="f"><label>2. Print type</label><div class="seg" id="mode"><button type="button" data-v="3" aria-pressed="true">B&amp;W ₱3</button><button type="button" data-v="8" aria-pressed="false">Color ₱8</button><button type="button" data-v="15" aria-pressed="false">Photo ₱15</button></div></div>
+      <div class="f"><label for="pages">Pages</label><input type="number" id="pages" min="1" max="200" value="1"></div>
+      <div class="f"><label for="copies">Copies</label><input type="number" id="copies" min="1" max="50" value="1"></div>
+      <div class="f"><label>3. Pay with</label><div class="seg" id="pay"><button type="button" data-v="Cash" aria-pressed="true">Cash</button><button type="button" data-v="Card" aria-pressed="false">Card</button><button type="button" data-v="E-wallet" aria-pressed="false">E-wallet</button></div></div>
+    </div>
+    <div class="sum" aria-live="polite">
+      <div class="row"><span>File</span><b id="sf">None selected</b></div>
+      <div class="row"><span>Print</span><b id="sp">B&amp;W, 1 page × 1</b></div>
+      <div class="row"><span>Payment</span><b id="sy">Cash</b></div>
+      <div class="row tot"><span>Total</span><span id="st">₱3</span></div>
+      <div class="bar" id="bar"><i></i></div>
+      <div class="msg" id="pm"></div>
+      <button class="btn p" id="go" type="button" style="justify-content:center">Pay &amp; Print</button>
+      <p class="note" style="margin:0">Demo only. No real printing happens on this website.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="locations">
+  <h2>Find a Machine</h2><i></i>
+  <p class="sub">Search by place or city, then tap Directions to open the map.</p>
+  <label for="lq" style="position:absolute;left:-9999px">Search locations</label>
+  <input type="search" id="lq" placeholder="Search a place or city…">
+  <div class="loc" id="ll"></div>
+  <p class="note">Sample locations. Replace them with your real machines in the code.</p>
+</section>
+
+<section class="panel" id="contact">
+  <h2>Contact Us</h2><i></i>
+  <div class="contact">
+    <div class="ci">
+      <p>Questions, a machine problem, or want a Printmo machine in your place? Send us a message.</p>
+      <p><b>Email:</b> <a href="mailto:hello@printmo.example" id="em" style="color:var(--blue)">hello@printmo.example</a></p>
+      <p><b>Hours:</b> Machines are open 24/7. Support replies Mon–Sat, 8 AM–6 PM.</p>
+    </div>
+    <form id="cf" novalidate>
+      <div class="f"><label for="cn">Name</label><input type="text" id="cn" autocomplete="name"></div>
+      <div class="f"><label for="ce">Email</label><input type="email" id="ce" autocomplete="email"></div>
+      <div class="f"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea></div>
+      <button class="btn p" type="submit">Send message</button>
+      <div class="msg" id="cmsg" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+<footer>© 2026 Printmo Vendo Machine. Fast. Easy. Affordable.</footer>
+
+<script>
+var EMAIL="hello@printmo.example";
+var LOCS=[
+{n:"PLMun University",a:"Pamantasan ng Lungsod ng Muntinlupa, Muntinlupa City",s:1},
+{n:"Muntinlupa City",a:"Muntinlupa City, Metro Manila",s:1},
+{n:"City Library, Main Branch",a:"Ground floor lobby, Manila",s:1},
+{n:"Central University Campus",a:"Student center, Quezon City",s:1},
+{n:"Public Market Terminal",a:"Entrance gate B, Cebu City",s:0},
+{n:"Town Hall Lobby",a:"Main hall, Davao City",s:1},
+{n:"Bus Station Waiting Area",a:"Terminal 2, Baguio City",s:1},
+{n:"Coworking Hub",a:"3rd floor, Makati City",s:0}];
+var $=function(i){return document.getElementById(i)};
+function peso(n){return "₱"+n.toLocaleString("en-PH")}
+
+/* nav highlight */
+var links=[].slice.call(document.querySelectorAll("nav a"));
+var secs=links.map(function(a){return $(a.getAttribute("href").slice(1))});
+function spy(){var y=window.scrollY+140,cur=0;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});
+ if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4)cur=secs.length-1;
+ links.forEach(function(a,i){a.classList.toggle("on",i===cur)})}
+window.addEventListener("scroll",spy,{passive:true});spy();
+
+/* locations */
+function drawLocs(){var q=$("lq").value.trim().toLowerCase(),h="";
+ LOCS.forEach(function(l){if((l.n+" "+l.a).toLowerCase().indexOf(q)<0)return;
+  h+='<div class="lc"><span class="tag'+(l.s?'':' busy')+'">'+(l.s?'Available':'Busy')+'</span><h3>'+l.n+'</h3><p>'+l.a+'</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(l.n+" "+l.a)+'">Directions →</a></div>'});
+ $("ll").innerHTML=h||'<p class="sub">No machines found. Try another place.</p>'}
+$("lq").addEventListener("input",drawLocs);drawLocs();
+
+/* calculator */
+var st={rate:3,mode:"B&W",pay:"Cash",running:false};
+function seg(id,cb){$(id).addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+ [].forEach.call($(id).children,function(x){x.setAttribute("aria-pressed",x===b)});cb(b)})}
+seg("mode",function(b){st.rate=+b.dataset.v;st.mode=b.textContent.split(" ₱")[0];calc()});
+seg("pay",function(b){st.pay=b.dataset.v;calc()});
+function num(id,mx){var v=parseInt($(id).value,10);if(!v||v<1)v=1;return Math.min(v,mx)}
+function calc(){var p=num("pages",200),c=num("copies",50);
+ $("sp").textContent=st.mode+", "+p+(p>1?" pages":" page")+" × "+c;$("sy").textContent=st.pay;
+ $("st").textContent=peso(st.rate*p*c)}
+["pages","copies"].forEach(function(i){$(i).addEventListener("input",calc)});
+$("file").addEventListener("change",function(){var f=this.files[0];$("sf").textContent=f?(f.name.length>22?f.name.slice(0,19)+"…":f.name):"None selected";$("pm").textContent="";$("pm").className="msg"});
+$("go").addEventListener("click",function(){
+ var m=$("pm");if(st.running)return;
+ if(!$("file").files[0]){m.className="msg err";m.textContent="Please upload a file first.";return}
+ st.running=true;$("go").disabled=true;m.className="msg";m.textContent="Processing "+st.pay+" payment…";
+ var bar=$("bar");bar.style.display="block";var fill=bar.firstElementChild,w=0;fill.style.width="0";
+ var t=setInterval(function(){w+=10;fill.style.width=w+"%";
+  if(w===30)m.textContent="Payment received. Printing…";
+  if(w>=100){clearInterval(t);m.textContent="Done! Collect your document from the tray.";
+   st.running=false;$("go").disabled=false;setTimeout(function(){bar.style.display="none"},1500)}},350)});
+calc();
+
+/* contact form (opens the visitor's email app) */
+$("em").textContent=EMAIL;$("em").href="mailto:"+EMAIL;
+$("cf").addEventListener("submit",function(e){e.preventDefault();
+ var n=$("cn").value.trim(),em=$("ce").value.trim(),m=$("cm").value.trim(),o=$("cmsg");
+ if(!n||!/^\S+@\S+\.\S+$/.test(em)||!m){o.className="msg err";o.textContent="Please fill in your name, a valid email, and a message.";return}
+ o.className="msg";o.textContent="Opening your email app to send…";
+ location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Message from "+n)+"&body="+encodeURIComponent(m+"\n\n"+n+" ("+em+")")});
+
+/* search */
+var IDX=[{t:"Home",d:"Print anytime, anywhere",h:"#home"},{t:"How It Works",d:"Upload, pay, print in 3 steps",h:"#how"},{t:"Services & Rates",d:"Black & white, color, photo prices",h:"#services"},{t:"Try the machine",d:"Price calculator and demo",h:"#services"},{t:"Find a Machine",d:"Locations and directions",h:"#locations"},{t:"Contact",d:"Email and message form",h:"#contact"}]
+ .concat(LOCS.map(function(l){return{t:l.n,d:l.a,h:"#locations",loc:l.n}}));
+function drawS(){var q=$("sq").value.trim().toLowerCase(),h="";
+ IDX.forEach(function(x,i){if(q&&(x.t+" "+x.d).toLowerCase().indexOf(q)<0)return;
+  h+='<li><a href="'+x.h+'" data-i="'+i+'">'+x.t+'<small>'+x.d+'</small></a></li>'});
+ $("sr").innerHTML=h||'<li style="padding:12px;color:var(--muted)">Nothing found.</li>'}
+function openS(){$("so").classList.add("open");$("sq").value="";drawS();$("sq").focus()}
+function closeS(){$("so").classList.remove("open");$("sb").focus()}
+$("sb").addEventListener("click",openS);
+$("sq").addEventListener("input",drawS);
+$("so").addEventListener("click",function(e){if(e.target===$("so"))return closeS();
+ var a=e.target.closest("a");if(a){var x=IDX[+a.dataset.i];if(x&&x.loc){$("lq").value=x.loc;drawLocs()}closeS()}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&$("so").classList.contains("open"))closeS()});
+</script>
+</body>
+</html>
